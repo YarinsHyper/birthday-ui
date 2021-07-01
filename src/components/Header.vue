@@ -14,10 +14,6 @@
   >
     <h2>Create Birthday Info</h2>
 
-    <!-- <label for="date">date:</label><br>
-    <input type="fname" />
-    <label for="personalNumber">First name:</label><br>
-    <input type="personal-number" /> -->
   </Popup>
   <UpdateButton text="Update" color="rgb(97, 140, 196)" />
   <DeleteButton text="Delete" color="rgb(97, 140, 196)" />

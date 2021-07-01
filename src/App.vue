@@ -4,65 +4,54 @@
     <div class="birthdayOutput">
       <Birthdays @toggle-modify="toggleModify" :birthdays="birthdays" />
     </div>
-    <div class="pagination"></div>
+    <div class="pagination">
+      <Pagination />
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
 import Birthdays from "./components/Birthdays";
+import Pagination from "./components/Pagination";
+
 
 export default {
   name: "App",
   components: {
     Header,
     Birthdays,
+    Pagination,
   },
   data() {
     return { birthdays: [] };
   },
-  created() {
-    this.birthdays = [
-      {
-        _id: "ObjectId(60d2c3bae3f1ccfc99e3bfa8)",
-        date: "3215646123",
-        personalNumber: "25819714123",
-        name: "shahar",
-        modify: true,
-      },
-      {
-        _id: "ObjectId(60d2c3c7e3f1ccfc99e3bfa9)",
-        date: "10022002",
-        personalNumber: "322491465",
-        name: "yarin",
-        modify: true,
-      },
-      {
-        _id: false,
-        date: "15061990",
-        personalNumber: "648876529",
-        name: "yosef",
-        modify: false,
-      },
-      {
-        _id: "ObjectId(60d2c3e3e3f1ccf8698a6da69)",
-        date: "28476325",
-        personalNumber: "871263876",
-        name: "aviel",
-        modify: false,
-      },
-    ];
-  },
   methods: {
     toggleModify(id, modify) {
-      let pn = '';
       this.birthdays = this.birthdays.map((birthday) =>
         birthday._id === id
-          ? { ...birthday, modify: !birthday.modify}
+          ? { ...birthday, modify: !birthday.modify }
           : birthday
       );
       console.log(!modify);
     },
+    async fetchBirthdays() {
+      const res = await fetch("api/birthdays");
+
+      const data = await res.json();
+
+      return data;
+    },
+    // async fetchBirthday(id) {
+    //   const res = await fetch(`api/birthdays/${id}`);
+
+    //   const data = await res.json();
+    //   if (birthday.modify === true) modifyCount++;
+    //   return data;
+    // },
+  },
+  async created() {
+    this.birthdays = await this.fetchBirthdays();
   },
 };
 </script>
@@ -104,7 +93,7 @@ body {
   height: 45px;
   margin: 10px auto;
   overflow: auto;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0px;
 }
 

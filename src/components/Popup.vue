@@ -21,6 +21,10 @@
 </template>
 
 <script>
+const axios = require("axios").default;
+const qs = require("qs");
+const url = "http://localhost:9000/api";
+
 export default {
   props: ["TogglePopup"],
   data() {
@@ -32,12 +36,14 @@ export default {
   },
   methods: {
     inputInfo() {
-      let birthdayObject = {
-        Name: this.name,
-        Date: this.date,
-        personalNumber: this.personalNumber,
-      };
-      console.log(birthdayObject);
+      axios.post(
+        `${url}/createBirthday`,
+        qs.stringify({
+          name: this.name,
+          date: this.date,
+          personalNumber: this.personalNumber,
+        })
+      );
     },
   },
 };

@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     onClick() {
-      console.log("create pressed!!")
+      console.log("Create Button Pressed!");
     },
   },
 };
