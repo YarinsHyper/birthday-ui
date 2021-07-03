@@ -15,6 +15,9 @@ import Header from "./components/Header";
 import Birthdays from "./components/Birthdays";
 import Pagination from "./components/Pagination";
 
+let modifies = 0;
+// let birthdaysNew = [];
+
 export default {
   name: "App",
   components: {
@@ -37,20 +40,37 @@ export default {
     async fetchBirthdays() {
       const res = await fetch("api/birthdays");
 
-      const data = await res.json();
+      const data = res.json();
 
       return data;
     },
-    // async fetchBirthday(id) {
-    //   const res = await fetch(`api/birthdays/${id}`);
-
-    //   const data = await res.json();
-    //   if (birthday.modify === true) modifyCount++;
-    //   return data;
-    // },
   },
+  // async beforeMount() {
+  //   let birthdaysData = [];
+  //   try {
+  //     birthdaysData = await axios.get(
+  //       "http://localhost:9000/api/getAllBirthdays"
+  //     );
+  //     let newData = birthdaysData.data.birthdays;
+  //     birthdaysNew = birthdaysData;
+  //     birthdaysNew.forEach((birthday) => {
+  //       fs.appendFile(".../db.json", birthday, function (err) {
+  //         if (err) throw err;
+  //         console.log("data inserted succesfully");
+  //       });
+  //     });
+  //     console.log(newData);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   async created() {
     this.birthdays = await this.fetchBirthdays();
+
+    this.birthdays.forEach((birthday) => {
+      if (birthday.modify === true) modifies++;
+    });
+    console.log("modify-count: " + modifies);
   },
 };
 </script>
