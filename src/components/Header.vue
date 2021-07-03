@@ -3,54 +3,80 @@
     <h1>{{ title }}</h1>
   </header>
   <CreateButton
-    @click="() => TogglePopup('buttonTrigger')"
+    @click="() => CreateTogglePopup('buttonTrigger')"
     text="Create"
     color="rgb(97, 140, 196)"
   />
+  <UpdateButton
+    @click="() => UpdateTogglePopup('buttonTrigger')"
+    text="Update"
+    color="rgb(97, 140, 196)"
+  />
+  <GetAllButton text="Get All" color="rgb(97, 140, 196)" />
+  <DeleteButton text="Delete" color="rgb(97, 140, 196)" />
 
-  <Popup
-    v-if="popupTriggers.buttonTrigger"
-    :TogglePopup="() => TogglePopup('buttonTrigger')"
+  <UpdateButtonPopup
+    v-if="updatePopupTrigger.buttonTrigger"
+    :updateTogglePopup="() => UpdateTogglePopup('buttonTrigger')"
+  >
+    <h2>Update Birthday</h2>
+  </UpdateButtonPopup>
+  <CreateButtonPopup
+    v-if="createPopupTrigger.buttonTrigger"
+    :createTogglePopup="() => CreateTogglePopup('buttonTrigger')"
   >
     <h2>Create Birthday Info</h2>
-
-  </Popup>
-  <UpdateButton text="Update" color="rgb(97, 140, 196)" />
-  <DeleteButton text="Delete" color="rgb(97, 140, 196)" />
+  </CreateButtonPopup>
 </template>
 
 <script>
 import CreateButton from "./CreateButton";
+import GetAllButton from "./GetAllButton";
 import UpdateButton from "./UpdateButton";
 import DeleteButton from "./DeleteButton";
-import Popup from "./Popup";
+import CreateButtonPopup from "./CreateButtonPopup";
+import UpdateButtonPopup from "./UpdateButtonPopup";
 import { ref } from "vue";
 
 export default {
   setup() {
-    const popupTriggers = ref({
+    const createPopupTrigger = ref({
       buttonTrigger: false,
     });
 
-    const TogglePopup = (trigger) => {
-      popupTriggers.value[trigger] = !popupTriggers.value[trigger];
+    const updatePopupTrigger = ref({
+      buttonTrigger: false,
+    });
+
+    const CreateTogglePopup = (trigger) => {
+      createPopupTrigger.value[trigger] = !createPopupTrigger.value[trigger];
+    };
+
+    const UpdateTogglePopup = (trigger) => {
+      updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
     };
 
     return {
-      Popup,
-      popupTriggers,
-      TogglePopup,
+      CreateButtonPopup,
+      UpdateButtonPopup,
+      createPopupTrigger,
+      updatePopupTrigger,
+      CreateTogglePopup,
+      UpdateTogglePopup,
     };
   },
   name: "Header",
   props: {
     title: String,
+    color: String,
   },
   components: {
     CreateButton,
     UpdateButton,
+    GetAllButton,
     DeleteButton,
-    Popup,
+    CreateButtonPopup,
+    UpdateButtonPopup,
   },
 };
 </script>

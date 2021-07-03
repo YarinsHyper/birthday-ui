@@ -1,6 +1,6 @@
 <template>
-  <div class="popup">
-    <div class="popup-inner">
+  <div class="Popup">
+    <div class="Popup-inner">
       <div>
         <slot />
         <form>
@@ -13,8 +13,8 @@
         </form>
       </div>
       <div>
-        <button id="popupClose" @click="TogglePopup">Close</button>
-        <button id="popupButton" @click="inputInfo">Submit</button>
+        <button id="PopupClose" @click="createTogglePopup">Close</button>
+        <button id="PopupButton" @click="inputInfo">Submit</button>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@ const qs = require("qs");
 const url = "http://localhost:9000/api";
 
 export default {
-  props: ["TogglePopup"],
+  props: ["createTogglePopup"],
   data() {
     return {
       name: "",
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.popup {
+.Popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -64,19 +64,19 @@ export default {
   justify-content: center;
 }
 
-.popup-inner {
+.Popup-inner {
   background: rgb(159, 178, 204);
   border-radius: 1.5mm;
   padding: 42px;
 }
 
-#popupClose {
+#PopupClose {
   margin-left: 70px;
   padding: 6px;
   font-size: 16px;
 }
 
-#popupButton {
+#PopupButton {
   padding: 6px;
   /* margin: 10px 0px; */
   margin-left: 20px;

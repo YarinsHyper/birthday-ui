@@ -1,11 +1,10 @@
 <template>
-  <button @click="getBirthdays" :style="{ background: color }" class="button">
+  <button @click="onClick()" :style="{ background: color }" class="button">
     {{ text }}
   </button>
 </template>
 
 <script>
-const axios = require("axios");
 
 export default {
   name: "updateButton",
@@ -14,14 +13,8 @@ export default {
     color: String,
   },
   methods: {
-    async getBirthdays() {
-      const data = {};
-      try {
-        data = await axios.get("http://localhost:9000/api/getAllBirthday");
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
+    onClick() {
+      console.log("Update Button Pressed!");
     },
   },
 };

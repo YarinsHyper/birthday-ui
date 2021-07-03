@@ -15,7 +15,6 @@ import Header from "./components/Header";
 import Birthdays from "./components/Birthdays";
 import Pagination from "./components/Pagination";
 
-
 export default {
   name: "App",
   components: {
@@ -33,7 +32,7 @@ export default {
           ? { ...birthday, modify: !birthday.modify }
           : birthday
       );
-      console.log(!modify);
+      console.log(!modify, id);
     },
     async fetchBirthdays() {
       const res = await fetch("api/birthdays");
