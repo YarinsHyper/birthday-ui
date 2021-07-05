@@ -10,7 +10,7 @@
   <UpdateButton
     @click="() => UpdateTogglePopup('buttonTrigger')"
     text="Update"
-    color="rgb(97, 140, 196)"
+    :color="isMod ? `red` : 'rgb(97, 140, 196)'"
   />
   <GetAllButton text="Get All" color="rgb(97, 140, 196)" />
   <DeleteButton text="Delete" color="rgb(97, 140, 196)" />
@@ -37,9 +37,11 @@ import DeleteButton from "./DeleteButton";
 import CreateButtonPopup from "./CreateButtonPopup";
 import UpdateButtonPopup from "./UpdateButtonPopup";
 import { ref } from "vue";
+import { isMod } from "../App";
 
 export default {
   setup() {
+    
     const createPopupTrigger = ref({
       buttonTrigger: false,
     });
@@ -50,6 +52,9 @@ export default {
 
     const CreateTogglePopup = (trigger) => {
       createPopupTrigger.value[trigger] = !createPopupTrigger.value[trigger];
+      if(createPopupTrigger.value[trigger] === false) {
+        location.reload()
+      }
     };
 
     const UpdateTogglePopup = (trigger) => {
@@ -63,6 +68,7 @@ export default {
       updatePopupTrigger,
       CreateTogglePopup,
       UpdateTogglePopup,
+      isMod,
     };
   },
   name: "Header",

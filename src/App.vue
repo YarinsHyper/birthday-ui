@@ -16,7 +16,6 @@ import Birthdays from "./components/Birthdays";
 import Pagination from "./components/Pagination";
 
 let modifies = 0;
-// let birthdaysNew = [];
 
 export default {
   name: "App",
@@ -26,46 +25,28 @@ export default {
     Pagination,
   },
   data() {
-    return { birthdays: [] };
+    return {
+      birthdays: [],
+    };
   },
   methods: {
-    toggleModify(id, modify) {
+    toggleModify(personalNumber, modify) {
       this.birthdays = this.birthdays.map((birthday) =>
-        birthday._id === id
+        birthday.personalNumber === personalNumber
           ? { ...birthday, modify: !birthday.modify }
           : birthday
       );
-      console.log(!modify, id);
+      console.log(!modify, personalNumber);
     },
     async fetchBirthdays() {
-      const res = await fetch("api/birthdays");
-
+      const res = await fetch("http://localhost:9000/api/getAllBirthdays");
       const data = res.json();
-
       return data;
     },
   },
-  // async beforeMount() {
-  //   let birthdaysData = [];
-  //   try {
-  //     birthdaysData = await axios.get(
-  //       "http://localhost:9000/api/getAllBirthdays"
-  //     );
-  //     let newData = birthdaysData.data.birthdays;
-  //     birthdaysNew = birthdaysData;
-  //     birthdaysNew.forEach((birthday) => {
-  //       fs.appendFile(".../db.json", birthday, function (err) {
-  //         if (err) throw err;
-  //         console.log("data inserted succesfully");
-  //       });
-  //     });
-  //     console.log(newData);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
   async created() {
-    this.birthdays = await this.fetchBirthdays();
+    const birthdaysData = await this.fetchBirthdays();
+    this.birthdays = birthdaysData.birthdays;
 
     this.birthdays.forEach((birthday) => {
       if (birthday.modify === true) modifies++;
@@ -149,3 +130,4 @@ h1 {
   font-size: 45px;
 }
 </style>
+

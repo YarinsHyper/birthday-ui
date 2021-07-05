@@ -1,6 +1,6 @@
 <template>
   <div
-    @dblclick="$emit('toggle-modify', birthday._id, birthday.modify)"
+    @dblclick="$emit('toggle-modify', birthday.personalNumber, birthday.modify)"
     :class="[birthday.modify ? 'modify' : '', 'birthday']"
   >
     <h3>Birthday Object:</h3>

@@ -1,7 +1,7 @@
 <template>
-  <div :key="birthday._id" v-for="birthday in birthdays">
+  <div :key="birthday.personalNumber" v-for="birthday in birthdays">
     <Birthday
-      @toggle-modify="$emit('toggle-modify', birthday._id, birthday.modify)"
+      @toggle-modify="$emit('toggle-modify', birthday.personalNumber, birthday.modify)"
       :birthday="birthday"
     />
   </div>
