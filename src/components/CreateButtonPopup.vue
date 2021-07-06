@@ -44,6 +44,7 @@ export default {
           personalNumber: this.personalNumber,
         })
       );
+      location.reload();
     },
   },
 };

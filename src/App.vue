@@ -4,26 +4,24 @@
     <div class="birthdayOutput">
       <Birthdays @toggle-selected="toggleSelected" :birthdays="birthdays" />
     </div>
-    <div class="pagination">
-      <Pagination />
-    </div>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
 import Birthdays from "./components/Birthdays";
-import Pagination from "./components/Pagination";
 
 const getBirthdaysAddress = "http://localhost:9000/api/getAllBirthdays";
-let selected = 0;
+export let selectedArray = [];
+let bdsSelected = 0;
+
+let selectedAmount = 0;
 
 export default {
   name: "App",
   components: {
     Header,
     Birthdays,
-    Pagination,
   },
   data() {
     return {
@@ -32,12 +30,20 @@ export default {
   },
   methods: {
     toggleSelected(personalNumber, selected) {
+      if (!selectedArray.includes(personalNumber) && !selected)
+        selectedArray.push(personalNumber);
+      if (selected) selectedArray = [];
+      selectedAmount = selectedArray.length;
       this.birthdays = this.birthdays.map((birthday) =>
         birthday.personalNumber === personalNumber
-          ? { ...birthday, selected: !birthday.selected }
+          ? { ...birthday, selected: !selected }
           : birthday
       );
+
       console.log(!selected, personalNumber);
+      console.log("count: ", selectedAmount);
+      console.log(selectedArray);
+      return selectedAmount;
     },
     async fetchBirthdays() {
       const res = await fetch(getBirthdaysAddress);
@@ -50,15 +56,14 @@ export default {
     this.birthdays = birthdaysData.birthdays;
 
     this.birthdays.forEach((birthday) => {
-      if (birthday.selected === true) selected++;
+      if (birthday.selected === true) bdsSelected++;
     });
-    console.log("selected: " + selected);
+    console.log("selected: " + bdsSelected);
   },
 };
 </script>
 
 <style>
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -80,7 +85,7 @@ body {
 
 .birthdayOutput {
   width: 1200px;
-  height: 650px;
+  height: 660px;
   margin: 12px auto;
   overflow: auto;
   /* border: 1px solid black; */

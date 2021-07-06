@@ -10,10 +10,10 @@
   <UpdateButton
     @click="() => UpdateTogglePopup('buttonTrigger')"
     text="Update"
-    :color="isMod ? `red` : 'rgb(97, 140, 196)'"
+    color="rgb(97, 140, 196)"
   />
   <GetAllButton text="Get All" color="rgb(97, 140, 196)" />
-  <DeleteButton text="Delete" color="rgb(97, 140, 196)" />
+  <!-- <DeleteButton text="Delete" color="rgb(97, 140, 196)" /> -->
 
   <UpdateButtonPopup
     v-if="updatePopupTrigger.buttonTrigger"
@@ -33,11 +33,10 @@
 import CreateButton from "./CreateButton";
 import GetAllButton from "./GetAllButton";
 import UpdateButton from "./UpdateButton";
-import DeleteButton from "./DeleteButton";
+// import DeleteButton from "./DeleteButton";
 import CreateButtonPopup from "./CreateButtonPopup";
 import UpdateButtonPopup from "./UpdateButtonPopup";
 import { ref } from "vue";
-import { isMod } from "../App";
 
 export default {
   setup() {
@@ -52,7 +51,6 @@ export default {
     const CreateTogglePopup = (trigger) => {
       createPopupTrigger.value[trigger] = !createPopupTrigger.value[trigger];
       if (createPopupTrigger.value[trigger] === false) {
-        location.reload();
       }
     };
 
@@ -67,7 +65,6 @@ export default {
       updatePopupTrigger,
       CreateTogglePopup,
       UpdateTogglePopup,
-      isMod,
     };
   },
   name: "Header",
@@ -79,7 +76,7 @@ export default {
     CreateButton,
     UpdateButton,
     GetAllButton,
-    DeleteButton,
+    // DeleteButton,
     CreateButtonPopup,
     UpdateButtonPopup,
   },
