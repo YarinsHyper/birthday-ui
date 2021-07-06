@@ -18,15 +18,16 @@ export default {};
 <style scoped>
 .pagination-button {
   padding: 9px;
-  margin: 2px;
+  margin: 5px;
   border-radius: 3px;
-  font-size: 1em;
+  font-size: 18px;
   cursor: pointer;
   background: rgb(97, 140, 196);
   margin-left:5px;
 }
 
 .pagination-row {
+  margin-top: 20px;
   margin-left: 150px;
 }
 </style>

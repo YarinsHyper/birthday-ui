@@ -41,7 +41,6 @@ import { isMod } from "../App";
 
 export default {
   setup() {
-    
     const createPopupTrigger = ref({
       buttonTrigger: false,
     });
@@ -52,8 +51,8 @@ export default {
 
     const CreateTogglePopup = (trigger) => {
       createPopupTrigger.value[trigger] = !createPopupTrigger.value[trigger];
-      if(createPopupTrigger.value[trigger] === false) {
-        location.reload()
+      if (createPopupTrigger.value[trigger] === false) {
+        location.reload();
       }
     };
 
@@ -98,5 +97,9 @@ header {
 h2 {
   margin-bottom: 20px;
   margin-left: 20px;
+}
+
+button {
+  font-size: 17px;
 }
 </style>

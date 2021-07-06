@@ -1,7 +1,7 @@
 <template>
   <div :key="birthday.personalNumber" v-for="birthday in birthdays">
     <Birthday
-      @toggle-modify="$emit('toggle-modify', birthday.personalNumber, birthday.modify)"
+      @toggle-selected="$emit('toggle-selected', birthday.personalNumber, birthday.selected)"
       :birthday="birthday"
     />
   </div>
@@ -18,6 +18,6 @@ export default {
   components: {
     Birthday,
   },
-  emits: ["toggle-modify"],
+  emits: ["toggle-selected"],
 };
 </script>

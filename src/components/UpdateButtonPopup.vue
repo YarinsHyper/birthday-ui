@@ -23,7 +23,7 @@
 <script>
 const axios = require("axios").default;
 const qs = require("qs");
-const url = "http://localhost:9000/api";
+const updateAddress = "http://localhost:9000/api/updateBirthday";
 
 export default {
   props: ["updateTogglePopup"],
@@ -37,7 +37,7 @@ export default {
   methods: {
     updateBirthday() {
       axios.post(
-        `${url}/updateBirthday`,
+        updateAddress,
         qs.stringify({
           name: this.name,
           date: this.date,

@@ -1,13 +1,13 @@
 <template>
   <div
-    @dblclick="$emit('toggle-modify', birthday.personalNumber, birthday.modify)"
-    :class="[birthday.modify ? 'modify' : '', 'birthday']"
+    @dblclick="$emit('toggle-selected', birthday.personalNumber, birthday.selected)"
+    :class="[birthday.selected ? 'selected' : '', 'birthday']"
   >
     <h3>Birthday Object:</h3>
     <p>{{ "name: " + birthday.name }}</p>
     <p>{{ "date: " + birthday.date }}</p>
     <p>{{ "personalNumber: " + birthday.personalNumber }}</p>
-    <!-- <input type="checkbox" id="modifyCheck" /> -->
+    <!-- <input type="checkbox" id="selectedCheck" /> -->
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   border-radius: 2.5mm;
 }
 
-.birthday.modify {
+.birthday.selected {
   border-left: 5px solid blue;
 }
 
@@ -41,9 +41,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 25px;
 }
 
-#modifyCheck {
+.birthday p {
+  font-size: 19px;
+  margin-top: 3px;
+}
+
+#selectedCheck {
   /* margin-left: 90%; */
   position: relative;
   left: 1070px;

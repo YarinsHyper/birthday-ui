@@ -2,7 +2,7 @@
   <div class="container">
     <Header title="Yarin's Birthday Service" />
     <div class="birthdayOutput">
-      <Birthdays @toggle-modify="toggleModify" :birthdays="birthdays" />
+      <Birthdays @toggle-selected="toggleSelected" :birthdays="birthdays" />
     </div>
     <div class="pagination">
       <Pagination />
@@ -15,7 +15,8 @@ import Header from "./components/Header";
 import Birthdays from "./components/Birthdays";
 import Pagination from "./components/Pagination";
 
-let modifies = 0;
+const getBirthdaysAddress = "http://localhost:9000/api/getAllBirthdays";
+let selected = 0;
 
 export default {
   name: "App",
@@ -30,16 +31,16 @@ export default {
     };
   },
   methods: {
-    toggleModify(personalNumber, modify) {
+    toggleSelected(personalNumber, selected) {
       this.birthdays = this.birthdays.map((birthday) =>
         birthday.personalNumber === personalNumber
-          ? { ...birthday, modify: !birthday.modify }
+          ? { ...birthday, selected: !birthday.selected }
           : birthday
       );
-      console.log(!modify, personalNumber);
+      console.log(!selected, personalNumber);
     },
     async fetchBirthdays() {
-      const res = await fetch("http://localhost:9000/api/getAllBirthdays");
+      const res = await fetch(getBirthdaysAddress);
       const data = res.json();
       return data;
     },
@@ -49,15 +50,14 @@ export default {
     this.birthdays = birthdaysData.birthdays;
 
     this.birthdays.forEach((birthday) => {
-      if (birthday.modify === true) modifies++;
+      if (birthday.selected === true) selected++;
     });
-    console.log("modify-count: " + modifies);
+    console.log("selected: " + selected);
   },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 * {
   box-sizing: border-box;
@@ -72,17 +72,16 @@ body {
 
 .container {
   width: 1700px;
-  height: 915px;
+  height: 916px;
   margin: 30px auto;
-  overflow: auto;
   /* border: 1px solid black; */
   padding: 0px;
 }
 
 .birthdayOutput {
   width: 1200px;
-  height: 655px;
-  margin: 15px auto;
+  height: 650px;
+  margin: 12px auto;
   overflow: auto;
   /* border: 1px solid black; */
   padding: 0px;
@@ -90,7 +89,7 @@ body {
 
 .pagination {
   width: 800px;
-  height: 45px;
+  height: 80px;
   margin: 10px auto;
   overflow: auto;
   /* border: 1px solid black; */

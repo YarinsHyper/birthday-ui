@@ -21,6 +21,6 @@ export default {
 
 <style scoped>
 button {
-  margin-left: 34vw;
+  margin-left: 30.5vw;
 }
 </style>
