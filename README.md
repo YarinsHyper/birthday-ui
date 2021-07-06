@@ -16,9 +16,6 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 ### Install links for Vue and everything needed to run project on your pc
 ```
 npm i vue-router@next
