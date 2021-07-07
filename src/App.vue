@@ -9,12 +9,10 @@
 
 <script>
 import Header from "./components/Header";
-import Birthdays from "./components/Birthdays";
+import Birthdays from "./components/data/Birthdays";
 
 const getBirthdaysAddress = "http://localhost:9000/api/getAllBirthdays";
-export let selectedArray = [];
-let bdsSelected = 0;
-
+let selectedArray = [];
 let selectedAmount = 0;
 
 export default {
@@ -54,11 +52,6 @@ export default {
   async created() {
     const birthdaysData = await this.fetchBirthdays();
     this.birthdays = birthdaysData.birthdays;
-
-    this.birthdays.forEach((birthday) => {
-      if (birthday.selected === true) bdsSelected++;
-    });
-    console.log("selected: " + bdsSelected);
   },
 };
 </script>
@@ -79,7 +72,6 @@ body {
   width: 1700px;
   height: 916px;
   margin: 30px auto;
-  /* border: 1px solid black; */
   padding: 0px;
 }
 
@@ -88,7 +80,6 @@ body {
   height: 660px;
   margin: 12px auto;
   overflow: auto;
-  /* border: 1px solid black; */
   padding: 0px;
 }
 
@@ -97,13 +88,11 @@ body {
   height: 80px;
   margin: 10px auto;
   overflow: auto;
-  /* border: 1px solid black; */
   padding: 0px;
 }
 
 .button {
   display: inline-block;
-  /* background:red; */
   color: black;
   font-weight: bold;
   border: 1 black;

@@ -5,16 +5,21 @@
         <slot />
         <form>
           <label id="inputTitle">Name: </label>
-          <input type="name" required v-model="name" /><br />
+          <input id="nameInput" type="name" required v-model="name" /><br />
           <label id="inputTitle">Date: </label>
-          <input type="name" required v-model="date" /><br />
+          <input id="dateInput" type="name" required v-model="date" /><br />
           <label id="inputTitle">Personal id: </label>
-          <input type="name" required v-model="personalNumber" />
+          <input
+            id="personalNumberInput"
+            type="name"
+            required
+            v-model="personalNumber"
+          />
         </form>
       </div>
       <div>
-        <button id="PopupClose" @click="createTogglePopup">Close</button>
-        <button id="PopupButton" @click="inputInfo">Submit</button>
+        <button id="PopupClose" @click="updateTogglePopup">Close</button>
+        <button id="PopupButton" @click="updateBirthday">Submit</button>
       </div>
     </div>
   </div>
@@ -23,10 +28,10 @@
 <script>
 const axios = require("axios").default;
 const qs = require("qs");
-const createAddress = "http://localhost:9000/api/createBirthday";
+const updateAddress = "http://localhost:9000/api/updateBirthday";
 
 export default {
-  props: ["createTogglePopup"],
+  props: ["updateTogglePopup"],
   data() {
     return {
       name: "",
@@ -35,9 +40,9 @@ export default {
     };
   },
   methods: {
-    inputInfo() {
+    updateBirthday() {
       axios.post(
-        createAddress,
+        updateAddress,
         qs.stringify({
           name: this.name,
           date: this.date,
@@ -79,7 +84,6 @@ export default {
 
 #PopupButton {
   padding: 6px;
-  /* margin: 10px 0px; */
   margin-left: 20px;
   margin-top: 30px;
   font-size: 16px;
@@ -87,6 +91,5 @@ export default {
 
 #inputTitle {
   font-size: 20px;
-  /* font-weight: bold; */
 }
 </style>

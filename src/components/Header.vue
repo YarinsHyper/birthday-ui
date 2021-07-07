@@ -7,20 +7,12 @@
     text="Create"
     color="rgb(97, 140, 196)"
   />
-  <UpdateButton
-    @click="() => UpdateTogglePopup('buttonTrigger')"
-    text="Update"
-    color="rgb(97, 140, 196)"
-  />
-  <GetAllButton text="Get All" color="rgb(97, 140, 196)" />
-  <!-- <DeleteButton text="Delete" color="rgb(97, 140, 196)" /> -->
-
-  <UpdateButtonPopup
+  <UpdatePopup
     v-if="updatePopupTrigger.buttonTrigger"
     :updateTogglePopup="() => UpdateTogglePopup('buttonTrigger')"
   >
     <h2>Update Birthday</h2>
-  </UpdateButtonPopup>
+  </UpdatePopup>
   <CreateButtonPopup
     v-if="createPopupTrigger.buttonTrigger"
     :createTogglePopup="() => CreateTogglePopup('buttonTrigger')"
@@ -30,12 +22,9 @@
 </template>
 
 <script>
-import CreateButton from "./CreateButton";
-import GetAllButton from "./GetAllButton";
-import UpdateButton from "./UpdateButton";
-// import DeleteButton from "./DeleteButton";
-import CreateButtonPopup from "./CreateButtonPopup";
-import UpdateButtonPopup from "./UpdateButtonPopup";
+import CreateButton from "./buttons/CreateButton";
+import CreateButtonPopup from "./popups/CreateButtonPopup";
+import UpdatePopup from "./popups/UpdatePopup";
 import { ref } from "vue";
 
 export default {
@@ -60,7 +49,7 @@ export default {
 
     return {
       CreateButtonPopup,
-      UpdateButtonPopup,
+      UpdatePopup,
       createPopupTrigger,
       updatePopupTrigger,
       CreateTogglePopup,
@@ -74,11 +63,8 @@ export default {
   },
   components: {
     CreateButton,
-    UpdateButton,
-    GetAllButton,
-    // DeleteButton,
     CreateButtonPopup,
-    UpdateButtonPopup,
+    UpdatePopup,
   },
 };
 </script>

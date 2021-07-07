@@ -13,8 +13,8 @@
         </form>
       </div>
       <div>
-        <button id="PopupClose" @click="updateTogglePopup">Close</button>
-        <button id="PopupButton" @click="updateBirthday">Submit</button>
+        <button id="PopupClose" @click="createTogglePopup">Close</button>
+        <button id="PopupButton" @click="inputInfo">Submit</button>
       </div>
     </div>
   </div>
@@ -23,10 +23,10 @@
 <script>
 const axios = require("axios").default;
 const qs = require("qs");
-const updateAddress = "http://localhost:9000/api/updateBirthday";
+const createAddress = "http://localhost:9000/api/createBirthday";
 
 export default {
-  props: ["updateTogglePopup"],
+  props: ["createTogglePopup"],
   data() {
     return {
       name: "",
@@ -35,9 +35,9 @@ export default {
     };
   },
   methods: {
-    updateBirthday() {
+    inputInfo() {
       axios.post(
-        updateAddress,
+        createAddress,
         qs.stringify({
           name: this.name,
           date: this.date,
@@ -79,7 +79,6 @@ export default {
 
 #PopupButton {
   padding: 6px;
-  /* margin: 10px 0px; */
   margin-left: 20px;
   margin-top: 30px;
   font-size: 16px;
@@ -87,6 +86,5 @@ export default {
 
 #inputTitle {
   font-size: 20px;
-  /* font-weight: bold; */
 }
 </style>

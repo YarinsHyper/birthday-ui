@@ -5,16 +5,15 @@
 </template>
 
 <script>
-
 export default {
-  name: "updateButton",
+  name: "createButton",
   props: {
     text: String,
     color: String,
   },
   methods: {
     onClick() {
-      console.log("Update Button Pressed!");
+      console.log("Create Button Pressed!");
     },
   },
 };
@@ -22,6 +21,6 @@ export default {
 
 <style scoped>
 button {
-  margin-left: 3vw;
+  margin-left: 41vw;
 }
 </style>
