@@ -2,7 +2,7 @@
   <div class="container">
     <Header title="Yarin's Birthday Service" />
     <div class="birthdayOutput">
-      <Birthdays @toggle-selected="toggleSelected" :birthdays="birthdays" />
+      <Birthdays :birthdays="birthdays" />
     </div>
   </div>
 </template>
@@ -10,10 +10,7 @@
 <script>
 import Header from "./components/Header";
 import Birthdays from "./components/data/Birthdays";
-
 const getBirthdaysAddress = "http://localhost:9000/api/getAllBirthdays";
-let selectedArray = [];
-let selectedAmount = 0;
 
 export default {
   name: "App",
@@ -27,22 +24,6 @@ export default {
     };
   },
   methods: {
-    toggleSelected(personalNumber, selected) {
-      if (!selectedArray.includes(personalNumber) && !selected)
-        selectedArray.push(personalNumber);
-      if (selected) selectedArray = [];
-      selectedAmount = selectedArray.length;
-      this.birthdays = this.birthdays.map((birthday) =>
-        birthday.personalNumber === personalNumber
-          ? { ...birthday, selected: !selected }
-          : birthday
-      );
-
-      console.log(!selected, personalNumber);
-      console.log("count: ", selectedAmount);
-      console.log(selectedArray);
-      return selectedAmount;
-    },
     async fetchBirthdays() {
       const res = await fetch(getBirthdaysAddress);
       const data = res.json();
@@ -65,7 +46,7 @@ export default {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: rgb(159, 178, 204);
+  background-color: #799cb4;
 }
 
 .container {
@@ -77,7 +58,7 @@ body {
 
 .birthdayOutput {
   width: 1200px;
-  height: 660px;
+  height: 680px;
   margin: 12px auto;
   overflow: auto;
   padding: 0px;
@@ -93,9 +74,8 @@ body {
 
 .button {
   display: inline-block;
-  color: black;
   font-weight: bold;
-  border: 1 black;
+  border: solid 1 black;
   padding: 10px 15px;
   margin: 5px;
   margin-top: 5.5vh;
@@ -123,4 +103,3 @@ h1 {
   font-size: 45px;
 }
 </style>
-

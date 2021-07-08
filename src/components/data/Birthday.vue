@@ -1,30 +1,23 @@
 <template>
-  <div
-    @dblclick="$emit('toggle-selected', birthday.personalNumber)"
-    :class="[birthday.selected ? 'selected' : '', 'birthday']"
-  >
+  <div :class="['birthday']">
     <h3>
       Birthday Object:
       <documentlogo
-        @click="UpdateTogglePopup('buttonTrigger')"
+        @click="updateToggle()"
         name="documentlogo"
         class="documentLogo"
       ></documentlogo>
-      <xIcon
-        @click="onDelete(birthday.personalNumber, birthday.name)"
-        name="xlogo"
-        class="xLogo"
-      ></xIcon>
+      <xIcon @click="onDelete()" name="xlogo" class="xLogo"></xIcon>
       <UpdatePopup
-        v-if="updatePopupTrigger.buttonTrigger"
-        :updateTogglePopup="() => UpdateTogglePopup('buttonTrigger')"
+        v-if="updateToggle.buttonTrigger"
+        :UpdateToggle="updateToggle"
       >
         <h2>Update Birthday</h2>
       </UpdatePopup>
     </h3>
-    <p>{{ "name: " + birthday.name }}</p>
-    <p>{{ "date: " + birthday.date }}</p>
-    <p>{{ "personalNumber: " + birthday.personalNumber }}</p>
+    <p>{{ "Name: " + birthday.name }}</p>
+    <p>{{ "Date: " + birthday.date }}</p>
+    <p>{{ "Personal Number: " + birthday.personalNumber }}</p>
   </div>
 </template>
 
@@ -44,32 +37,41 @@ export default {
   state: {
     selected: false,
   },
-  setup() {
-    const updatePopupTrigger = ref({
-      buttonTrigger: false,
-      name: "",
-      date: "",
-      personalNumber: "",
-    });
+  // setup() {
+  //   const updatePopupTrigger = ref({
+  //     buttonTrigger: false,
+  //   });
 
-    const UpdateTogglePopup = (trigger, personalNumber, name, date) => {
-      updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
-    };
-    return { UpdateTogglePopup, updatePopupTrigger };
-  },
+  //   const UpdateTogglePopup = () => {
+  //     const trigger = "buttonTrigger";
+  //     updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
+  //   };
+  //   return { UpdateTogglePopup, updatePopupTrigger };
+  // },
   components: {
     xIcon,
     documentlogo,
     UpdatePopup,
   },
   methods: {
-    onDelete(Id, Name) {
-      if (confirm(`Are you sure you want to \ndelete ${Name}'s birthday?`)) {
+    onDelete() {
+      if (
+        confirm(
+          `Are you sure you want to \ndelete ${this.birthday.name}'s birthday?`
+        )
+      ) {
         axios.delete(
-          `http://localhost:9000/api/deleteBirthday?personalNumber=${Id}`
+          `http://localhost:9000/api/deleteBirthday?personalNumber=${this.birthday.personalNumber}`
         );
         location.reload();
       }
+    },
+    updateToggle() {
+      const updatePopupTrigger = ref({
+        buttonTrigger: false,
+      });
+      const trigger = "buttonTrigger";
+      updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
     },
   },
 };
@@ -77,7 +79,8 @@ export default {
 
 <style>
 .birthday {
-  background: lightslategrey;
+  background: rgb(94, 135, 175);
+  border: solid 2px black;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;

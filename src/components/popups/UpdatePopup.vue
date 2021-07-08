@@ -18,7 +18,7 @@
         </form>
       </div>
       <div>
-        <button id="PopupClose" @click="updateTogglePopup">Close</button>
+        <button id="PopupClose" @click="UpdateToggle">Close</button>
         <button id="PopupButton" @click="updateBirthday">Submit</button>
       </div>
     </div>
@@ -31,12 +31,12 @@ const qs = require("qs");
 const updateAddress = "http://localhost:9000/api/updateBirthday";
 
 export default {
-  props: ["updateTogglePopup"],
+  props: ["UpdateToggle", "birthday"],
   data() {
     return {
-      name: "",
-      date: "",
-      personalNumber: "",
+      name: this.birthday.name,
+      date: this.birthday.date,
+      personalNumber: this.birthday.personalNumber,
     };
   },
   methods: {

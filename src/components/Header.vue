@@ -5,14 +5,8 @@
   <CreateButton
     @click="() => CreateTogglePopup('buttonTrigger')"
     text="Create"
-    color="rgb(97, 140, 196)"
+    color="rgb(169 172 173)"
   />
-  <UpdatePopup
-    v-if="updatePopupTrigger.buttonTrigger"
-    :updateTogglePopup="() => UpdateTogglePopup('buttonTrigger')"
-  >
-    <h2>Update Birthday</h2>
-  </UpdatePopup>
   <CreateButtonPopup
     v-if="createPopupTrigger.buttonTrigger"
     :createTogglePopup="() => CreateTogglePopup('buttonTrigger')"
@@ -24,16 +18,11 @@
 <script>
 import CreateButton from "./buttons/CreateButton";
 import CreateButtonPopup from "./popups/CreateButtonPopup";
-import UpdatePopup from "./popups/UpdatePopup";
 import { ref } from "vue";
 
 export default {
   setup() {
     const createPopupTrigger = ref({
-      buttonTrigger: false,
-    });
-
-    const updatePopupTrigger = ref({
       buttonTrigger: false,
     });
 
@@ -43,17 +32,10 @@ export default {
       }
     };
 
-    const UpdateTogglePopup = (trigger) => {
-      updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
-    };
-
     return {
       CreateButtonPopup,
-      UpdatePopup,
       createPopupTrigger,
-      updatePopupTrigger,
       CreateTogglePopup,
-      UpdateTogglePopup,
     };
   },
   name: "Header",
@@ -64,7 +46,6 @@ export default {
   components: {
     CreateButton,
     CreateButtonPopup,
-    UpdatePopup,
   },
 };
 </script>
