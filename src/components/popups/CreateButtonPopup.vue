@@ -13,7 +13,7 @@
         </form>
       </div>
       <div>
-        <button id="PopupClose" @click="createTogglePopup">Close</button>
+        <button id="PopupClose" @click="createToggle">Close</button>
         <button id="PopupButton" @click="inputInfo">Submit</button>
       </div>
     </div>
@@ -23,10 +23,10 @@
 <script>
 const axios = require("axios").default;
 const qs = require("qs");
-const createAddress = "http://localhost:9000/api/createBirthday";
+const createAddress = "http://localhost:9000/api/birthday";
 
 export default {
-  props: ["createTogglePopup"],
+  props: ["createToggle"],
   data() {
     return {
       name: "",

@@ -28,7 +28,7 @@
 <script>
 const axios = require("axios").default;
 const qs = require("qs");
-const updateAddress = "http://localhost:9000/api/updateBirthday";
+const updateAddress = "http://localhost:9000/api/birthday";
 
 export default {
   props: ["UpdateToggle", "birthday"],

@@ -3,14 +3,11 @@
     <h1>{{ title }}</h1>
   </header>
   <CreateButton
-    @click="() => CreateTogglePopup('buttonTrigger')"
+    @click="() => createToggle()"
     text="Create"
     color="rgb(169 172 173)"
   />
-  <CreateButtonPopup
-    v-if="createPopupTrigger.buttonTrigger"
-    :createTogglePopup="() => CreateTogglePopup('buttonTrigger')"
-  >
+  <CreateButtonPopup v-if="isCreatePopup" :createToggle="createToggle">
     <h2>Create Birthday Info</h2>
   </CreateButtonPopup>
 </template>
@@ -18,24 +15,13 @@
 <script>
 import CreateButton from "./buttons/CreateButton";
 import CreateButtonPopup from "./popups/CreateButtonPopup";
-import { ref } from "vue";
 
 export default {
-  setup() {
-    const createPopupTrigger = ref({
-      buttonTrigger: false,
-    });
-
-    const CreateTogglePopup = (trigger) => {
-      createPopupTrigger.value[trigger] = !createPopupTrigger.value[trigger];
-      if (createPopupTrigger.value[trigger] === false) {
-      }
-    };
+  data() {
+    const isCreatePopup = false;
 
     return {
-      CreateButtonPopup,
-      createPopupTrigger,
-      CreateTogglePopup,
+      isCreatePopup,
     };
   },
   name: "Header",
@@ -46,6 +32,12 @@ export default {
   components: {
     CreateButton,
     CreateButtonPopup,
+  },
+  methods: {
+    createToggle() {
+      this.isCreatePopup = !this.isCreatePopup;
+      return this.isCreatePopup;
+    },
   },
 };
 </script>

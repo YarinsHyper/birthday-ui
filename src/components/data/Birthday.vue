@@ -9,8 +9,9 @@
       ></documentlogo>
       <xIcon @click="onDelete()" name="xlogo" class="xLogo"></xIcon>
       <UpdatePopup
-        v-if="updateToggle.buttonTrigger"
+        v-if="isUpdatePopup"
         :UpdateToggle="updateToggle"
+        :birthday="birthday"
       >
         <h2>Update Birthday</h2>
       </UpdatePopup>
@@ -26,7 +27,6 @@ import xIcon from "../icons/XIcon";
 import documentlogo from "../icons/DocumentIcon";
 import UpdatePopup from "../popups/UpdatePopup";
 import axios from "axios";
-import { ref } from "vue";
 
 export default {
   name: "Birthday",
@@ -37,17 +37,13 @@ export default {
   state: {
     selected: false,
   },
-  // setup() {
-  //   const updatePopupTrigger = ref({
-  //     buttonTrigger: false,
-  //   });
+  data() {
+    const isUpdatePopup = false;
 
-  //   const UpdateTogglePopup = () => {
-  //     const trigger = "buttonTrigger";
-  //     updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
-  //   };
-  //   return { UpdateTogglePopup, updatePopupTrigger };
-  // },
+    return {
+      isUpdatePopup,
+    };
+  },
   components: {
     xIcon,
     documentlogo,
@@ -61,17 +57,14 @@ export default {
         )
       ) {
         axios.delete(
-          `http://localhost:9000/api/deleteBirthday?personalNumber=${this.birthday.personalNumber}`
+          `http://localhost:9000/api/birthday/${this.birthday.personalNumber}`
         );
         location.reload();
       }
     },
     updateToggle() {
-      const updatePopupTrigger = ref({
-        buttonTrigger: false,
-      });
-      const trigger = "buttonTrigger";
-      updatePopupTrigger.value[trigger] = !updatePopupTrigger.value[trigger];
+      this.isUpdatePopup = !this.isUpdatePopup;
+      return this.isUpdatePopup;
     },
   },
 };
