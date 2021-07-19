@@ -10,7 +10,7 @@
 <script>
 import Header from "./components/Header";
 import Birthdays from "./components/data/Birthdays";
-const getBirthdaysAddress = "http://localhost:9000/api/birthdays";
+const getBirthdaysAddress = "http://api-gateway:9000/api/birthdays";
 
 export default {
   name: "App",

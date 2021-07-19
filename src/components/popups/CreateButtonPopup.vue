@@ -23,7 +23,7 @@
 <script>
 const axios = require("axios").default;
 const qs = require("qs");
-const createAddress = "http://localhost:9000/api/birthday";
+const createAddress = "http://api-gateway:9000/api/birthday";
 
 export default {
   props: ["createToggle"],
