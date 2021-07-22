@@ -10,7 +10,7 @@ services:
         MONGO_INITDB_ROOT_USERNAME: root
         MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-        - "./data/db:/data/db"
+        - /data/db:/data/db
     
   mongo-express:
     image: mongo-express
@@ -40,10 +40,13 @@ services:
       - 9000:9000
     depends_on:
       - birthday-service
+      - mongo
 
-#   birthday-ui:
-#     build: .
-#     ports:
-#       - 8080:8080
-#     depends_on:
-#       - api-gateway
+  birthday-ui:
+    build: .
+    ports:
+      - 80:80
+    depends_on:
+      - api-gateway
+      - mongo
+    

@@ -28,7 +28,7 @@ import documentlogo from "../icons/DocumentIcon";
 import UpdatePopup from "../popups/UpdatePopup";
 import axios from "axios";
 
-const deleteAddress = `http://api-gateway:9000/api/birthday/${this.birthday.personalNumber}`;
+const deleteAddress = "http://localhost:9000/api/birthday/";
 
 export default {
   name: "Birthday",
@@ -58,7 +58,7 @@ export default {
           `Are you sure you want to \ndelete ${this.birthday.name}'s birthday?`
         )
       ) {
-        axios.delete(deleteAddress);
+        axios.delete(`${deleteAddress}${this.birthday.personalNumber}`);
         location.reload();
       }
     },

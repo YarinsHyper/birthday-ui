@@ -27,8 +27,7 @@
 
 <script>
 const axios = require("axios").default;
-const qs = require("qs");
-const updateAddress = "http://api-gateway:9000/api/birthday";
+const updateAddress = "http://localhost:9000/api/birthday";
 
 export default {
   props: ["UpdateToggle", "birthday"],
@@ -41,14 +40,11 @@ export default {
   },
   methods: {
     updateBirthday() {
-      axios.post(
-        updateAddress,
-        qs.stringify({
-          name: this.name,
-          date: this.date,
-          personalNumber: this.personalNumber,
-        })
-      );
+      axios.post(updateAddress, {
+        name: this.name,
+        date: this.date,
+        personalNumber: this.personalNumber,
+      });
       location.reload();
     },
   },
