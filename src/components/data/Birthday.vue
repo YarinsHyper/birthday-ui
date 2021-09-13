@@ -1,7 +1,8 @@
 <template>
   <div :class="['birthday']">
     <h3>
-      Birthday Object:
+      Birthday: 
+      <img id="birthdayBalloon" src="./images/10.png" />
       <documentlogo
         @click="updateToggle()"
         name="documentlogo"
@@ -72,7 +73,7 @@ export default {
 
 <style>
 .birthday {
-  background: rgb(94, 135, 175);
+  background: rgb(147, 187, 226);
   border: solid 2px black;
   margin: 5px;
   padding: 10px 20px;
@@ -100,6 +101,12 @@ export default {
   position: relative;
   left: 1070px;
   bottom: 50px;
+}
+
+#birthdayBalloon {
+  width: 30px;
+  height: 30px;
+  /* margin-left:215px; */
 }
 
 .xLogo {

@@ -1,15 +1,20 @@
 <template>
+  <MainPopup />
   <div class="container">
+    <img id="balloonsGif" src="./images/3.gif" />
+    <img id="titleImage" src="./images/title2.png" />
     <Header title="Yarin's Birthday Service" />
     <div class="birthdayOutput">
       <Birthdays :birthdays="birthdays" />
     </div>
+    <img id="presentGif" src="./images/present.gif" />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
 import Birthdays from "./components/data/Birthdays";
+import MainPopup from "./MainPopup";
 const getBirthdaysAddress = "http://localhost:9000/api/birthdays";
 
 export default {
@@ -17,6 +22,7 @@ export default {
   components: {
     Header,
     Birthdays,
+    MainPopup,
   },
   data() {
     return {
@@ -46,12 +52,12 @@ export default {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #799cb4;
+  background-color: white;
 }
 
 .container {
   width: 1700px;
-  height: 916px;
+  height: 880px;
   margin: 30px auto;
   padding: 0px;
 }
@@ -78,7 +84,7 @@ body {
   border: solid 1 black;
   padding: 10px 15px;
   margin: 5px;
-  margin-top: 5.5vh;
+  margin-top: 15vh;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
@@ -101,5 +107,31 @@ body {
 
 h1 {
   font-size: 45px;
+  position: absolute;
+  left: 715px;
+  top: 48px;
+  position: inline;
+}
+
+#titleImage {
+  width: 672px;
+  height: 230px;
+  position: absolute;
+  left: 640px;
+  top: -29px;
+  max-width: 100%;
+  max-height: 210px;
+}
+
+#balloonsGif {
+  position: absolute;
+  width: 200px;
+}
+
+#presentGif {
+  position: absolute;
+  top: 700px;
+  width: 200px;
+  left: 1640px;
 }
 </style>

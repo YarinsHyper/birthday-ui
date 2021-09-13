@@ -40,7 +40,6 @@ services:
       - 9000:9000
     depends_on:
       - birthday-service
-      - mongo
 
   birthday-ui:
     build: .
@@ -48,5 +47,4 @@ services:
       - 80:80
     depends_on:
       - api-gateway
-      - mongo
     
